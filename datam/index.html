@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        fetch('wendani.json').then(response => response.json()).then(jsonData => {
+            const mydata = jsonData;
+            // console.log(mydata) 
+            var sum=0;
+            var target=21000
+            for (var i = 0; i < mydata.length; i++) {
+
+                var tablebody = `
+                <tr>
+                    <td>${mydata[i].number}</td>
+                    <td>${mydata[i].name}</td>
+                    <td>${mydata[i].amount}</td>
+                </tr>
+                `;
+                amt=mydata[i].amount;
+                sum+=parseInt(amt);
+
+                document.getElementById('tbody').innerHTML+=tablebody;
+            }
+            document.getElementById('sum').innerHTML=sum;
+            document.getElementById('target').innerHTML=target;
+            document.getElementById('balance').innerHTML=target-sum;
+        }).catch(error => console.error(error));
+    </script>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>no</th>
+                <th>name</th>
+                <th>amount</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="2">Total</th>
+                <th id="sum"></th>
+            </tr>
+            <tr>
+                <th colspan="2">Target</th>
+                <th id="target"></th>
+                <tr>
+                    <th colspan="2">Balance</th>
+                    <th id="balance"></th>
+                </tr>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+
+</html>
